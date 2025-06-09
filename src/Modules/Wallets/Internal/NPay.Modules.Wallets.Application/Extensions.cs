@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NPay.Modules.Wallets.Application.Services;
 using NPay.Modules.Wallets.Shared;
 
-[assembly: InternalsVisibleTo("NPay.Modules.Wallets.Infrastructure")]
 namespace NPay.Modules.Wallets.Application;
 
 public static class Extensions
