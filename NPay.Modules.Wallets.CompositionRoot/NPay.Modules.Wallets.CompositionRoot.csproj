@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Modules\Wallets\Internal\NPay.Modules.Wallets.Api\NPay.Modules.Wallets.Api.csproj" />
+    <ProjectReference Include="..\src\Modules\Wallets\Internal\NPay.Modules.Wallets.Application\NPay.Modules.Wallets.Application.csproj" />
+    <ProjectReference Include="..\src\Modules\Wallets\Internal\NPay.Modules.Wallets.Core\NPay.Modules.Wallets.Core.csproj" />
+    <ProjectReference Include="..\src\Modules\Wallets\Internal\NPay.Modules.Wallets.Infrastructure\NPay.Modules.Wallets.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

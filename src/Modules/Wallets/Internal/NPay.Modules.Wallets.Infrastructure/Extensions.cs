@@ -4,6 +4,7 @@ using NPay.Modules.Wallets.Core.Owners.Repositories;
 using NPay.Modules.Wallets.Core.Wallets.Repositories;
 using NPay.Modules.Wallets.Infrastructure.DAL;
 using NPay.Modules.Wallets.Infrastructure.DAL.Repositories;
+using NPay.Modules.Wallets.Infrastructure.DAL.Seeder;
 using NPay.Modules.Wallets.Infrastructure.Storage;
 using NPay.Shared.Database;
 
@@ -17,6 +18,8 @@ public static class Extensions
         services.AddScoped<IOwnerRepository, OwnerRepository>();
         services.AddScoped<IWalletRepository, WalletRepository>();
         services.AddScoped<IWalletStorage, WalletStorage>();
+
+        services.AddScoped<IDbSeeder, WalletsSeeder>();
             
         return services;
     }

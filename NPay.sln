@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B8539E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPay.Modules.Wallets.Shared", "src\Modules\Wallets\Shared\NPay.Modules.Wallets.Shared\NPay.Modules.Wallets.Shared.csproj", "{8151C49C-0423-4967-803E-6532C1899037}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPay.Modules.Wallets.CompositionRoot", "NPay.Modules.Wallets.CompositionRoot\NPay.Modules.Wallets.CompositionRoot.csproj", "{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +207,18 @@ Global
 		{8151C49C-0423-4967-803E-6532C1899037}.Release|x64.Build.0 = Release|Any CPU
 		{8151C49C-0423-4967-803E-6532C1899037}.Release|x86.ActiveCfg = Release|Any CPU
 		{8151C49C-0423-4967-803E-6532C1899037}.Release|x86.Build.0 = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|x64.Build.0 = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Debug|x86.Build.0 = Debug|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|x64.ActiveCfg = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|x64.Build.0 = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|x86.ActiveCfg = Release|Any CPU
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,5 +245,6 @@ Global
 		{2D9A74B7-2BD2-4B7D-A81D-8C69B516378D} = {63F9DD56-0E40-4992-BDED-F37FCCC5C19C}
 		{B8539EBE-43A4-4834-92AA-A62193217AAE} = {6811A758-296C-49FF-A2DD-7A5EB3799E0D}
 		{8151C49C-0423-4967-803E-6532C1899037} = {B8539EBE-43A4-4834-92AA-A62193217AAE}
+		{D39C409A-CCAC-410B-AEA2-6A5BD8EA4AD5} = {63F9DD56-0E40-4992-BDED-F37FCCC5C19C}
 	EndGlobalSection
 EndGlobal

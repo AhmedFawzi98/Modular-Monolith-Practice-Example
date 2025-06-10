@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NPay.Modules.Users.Core.DAL;
+using NPay.Modules.Users.Core.DAL.Seeder;
 using NPay.Modules.Users.Core.Services;
 using NPay.Modules.Users.Shared;
 using NPay.Shared.Database;
@@ -13,6 +14,8 @@ public static class Extensions
         services.AddPostgres<UsersDbContext>();
         services.AddTransient<IUsersService, UsersService>();
         services.AddTransient<IUsersModuleApi, UsersModuleApi>();
+
+        services.AddScoped<IDbSeeder, UsersSeeder>();
             
         return services;
     }

@@ -10,7 +10,7 @@ internal class WalletsDbContext : DbContext
     public DbSet<Owner> Owners { get; set; }
     public DbSet<Transfer> Transfers { get; set; }
     public DbSet<Wallet> Wallets { get; set; }
-        
+
     public WalletsDbContext(DbContextOptions<WalletsDbContext> options) : base(options)
     {
     }
