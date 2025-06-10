@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using NPay.Modules.Notifications.Api;
 using NPay.Modules.Users.Api;
 using NPay.Modules.Wallets.Api;
@@ -25,5 +26,11 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
     endpoints.MapGet("/", ctx => ctx.Response.WriteAsync("NPay API"));
 });
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();
