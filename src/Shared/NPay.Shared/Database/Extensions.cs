@@ -20,11 +20,14 @@ public static class Extensions
         return services;
     }
 
-    public static IServiceCollection AddPostgres<T>(this IServiceCollection services) where T : DbContext
+    public static IServiceCollection AddPostgres<T>(this IServiceCollection services, string schemaName) where T : DbContext
     {
         var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
         var connectionString = configuration[$"{SectionName}:{nameof(PostgresOptions.ConnectionString)}"];
-        services.AddDbContext<T>(x => x.UseNpgsql(connectionString));
+        services.AddDbContext<T>(x => x.UseNpgsql(connectionString, npgsqlOptions =>
+        {
+            npgsqlOptions.MigrationsHistoryTable(DbConstants.MigraionHistoryTable, schemaName);
+        }));
 
         return services;
     }

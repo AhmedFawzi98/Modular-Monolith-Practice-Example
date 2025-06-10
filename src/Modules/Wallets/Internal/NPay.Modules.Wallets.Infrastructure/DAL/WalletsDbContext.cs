@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NPay.Modules.Wallets.Core.Owners.Aggregates;
 using NPay.Modules.Wallets.Core.Wallets.Aggregates;
 using NPay.Modules.Wallets.Core.Wallets.Entities;
+using NPay.Modules.Wallets.Infrastructure.DAL.Constants;
 
 namespace NPay.Modules.Wallets.Infrastructure.DAL;
 
@@ -17,7 +18,7 @@ internal class WalletsDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("wallets");
+        modelBuilder.HasDefaultSchema(WalletDbConstants.SchemaName);
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
 }

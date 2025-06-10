@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NPay.Modules.Users.Core.DAL.Constants;
 using NPay.Modules.Users.Core.Entities;
 
 namespace NPay.Modules.Users.Core.DAL;
@@ -13,7 +14,7 @@ internal sealed class UsersDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("users");
+        modelBuilder.HasDefaultSchema(UsersDbConstants.SchemaName);
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
 }
