@@ -1,6 +1,6 @@
 ﻿using System;
-using NPay.Shared.Commands;
+using MediatR;
 
 namespace NPay.Modules.Wallets.Application.Wallets.Commands;
 
-public record TransferFunds(Guid FromWalletId, Guid ToWalletId, decimal Amount) : ICommand;
+public record TransferFunds(Guid FromWalletId, Guid ToWalletId, decimal Amount) : IRequest;

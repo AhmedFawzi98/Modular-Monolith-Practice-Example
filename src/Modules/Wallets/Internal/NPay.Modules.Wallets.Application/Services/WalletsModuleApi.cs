@@ -1,21 +1,22 @@
 using System;
 using System.Threading.Tasks;
+using MediatR;
 using NPay.Modules.Wallets.Application.Wallets.Queries;
 using NPay.Modules.Wallets.Shared;
 using NPay.Modules.Wallets.Shared.DTO;
-using NPay.Shared.Dispatchers;
+using NPay.Shared.Events;
 
 namespace NPay.Modules.Wallets.Application.Services;
 
 internal sealed class WalletsModuleApi : IWalletsModuleApi
 {
-    private readonly IDispatcher _dispatcher;
+    private readonly IMediator _mediator;
 
-    public WalletsModuleApi(IDispatcher dispatcher)
+    public WalletsModuleApi(IMediator mediator)
     {
-        _dispatcher = dispatcher;
+        _mediator = mediator;
     }
 
-    public Task<WalletDto> GetWalletAsync(Guid walletId)
-        => _dispatcher.QueryAsync(new GetWallet { WalletId = walletId });
+    public async Task<WalletDto> GetWalletAsync(Guid walletId)
+        => await _mediator.Send(new GetWallet { WalletId = walletId });
 }

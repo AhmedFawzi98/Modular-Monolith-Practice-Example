@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPay.Modules.Wallets.Application.Wallets.Commands;
-using NPay.Shared.Dispatchers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace NPay.Modules.Wallets.Api.Controllers;
@@ -11,11 +11,11 @@ namespace NPay.Modules.Wallets.Api.Controllers;
 [Route("[controller]")]
 public class FundsController : ControllerBase
 {
-    private readonly IDispatcher _dispatcher;
+    private readonly IMediator _mediator;
 
-    public FundsController(IDispatcher dispatcher)
+    public FundsController(IMediator mediator)
     {
-        _dispatcher = dispatcher;
+        _mediator = mediator;
     }
         
     [HttpPost]
@@ -24,7 +24,7 @@ public class FundsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(AddFunds command)
     {
-        await _dispatcher.SendAsync(command);
+        await _mediator.Send(command);
         return NoContent();
     }
         
@@ -34,7 +34,7 @@ public class FundsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(TransferFunds command)
     {
-        await _dispatcher.SendAsync(command);
+        await _mediator.Send(command);
         return NoContent();
     }
 }

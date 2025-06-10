@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPay.Modules.Wallets.Application.Wallets.Commands;
 using NPay.Modules.Wallets.Application.Wallets.Queries;
 using NPay.Modules.Wallets.Shared.DTO;
-using NPay.Shared.Dispatchers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace NPay.Modules.Wallets.Api.Controllers;
@@ -14,11 +14,11 @@ namespace NPay.Modules.Wallets.Api.Controllers;
 [Route("[controller]")]
 public class WalletsController : ControllerBase
 {
-    private readonly IDispatcher _dispatcher;
+    private readonly IMediator _mediator;
 
-    public WalletsController(IDispatcher dispatcher)
+    public WalletsController(IMediator mediator)
     {
-        _dispatcher = dispatcher;
+        _mediator = mediator;
     }
 
     [HttpGet("{walletId:guid}")]
@@ -27,7 +27,7 @@ public class WalletsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<WalletDto>> Get(Guid walletId)
     {
-        var wallet = await _dispatcher.QueryAsync(new GetWallet { WalletId = walletId });
+        var wallet = await _mediator.Send(new GetWallet { WalletId = walletId });
         if (wallet is not null)
         {
             return Ok(wallet);
@@ -42,7 +42,7 @@ public class WalletsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(AddWallet command)
     {
-        await _dispatcher.SendAsync(command);
+        await _mediator.Send(command);
         return CreatedAtAction(nameof(Get), new { walletId = command.WalletId }, null);
     }
 }

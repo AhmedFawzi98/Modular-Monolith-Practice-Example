@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPay.Modules.Wallets.Application.Owners.Commands;
-using NPay.Shared.Dispatchers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace NPay.Modules.Wallets.Api.Controllers;
@@ -11,11 +11,11 @@ namespace NPay.Modules.Wallets.Api.Controllers;
 [Route("[controller]")]
 public class OwnersController : ControllerBase
 {
-    private readonly IDispatcher _dispatcher;
+    private readonly IMediator _mediator;
 
-    public OwnersController(IDispatcher dispatcher)
+    public OwnersController(IMediator mediator)
     {
-        _dispatcher = dispatcher;
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -24,7 +24,7 @@ public class OwnersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(AddOwner command)
     {
-        await _dispatcher.SendAsync(command);
+        await _mediator.Send(command);
         return NoContent();
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NPay.Modules.Wallets.Core.Wallets.Exceptions;
 using NPay.Modules.Wallets.Core.Wallets.Repositories;
 using NPay.Modules.Wallets.Shared.Events;
-using NPay.Shared.Commands;
 using NPay.Shared.Messaging;
 using NPay.Shared.Time;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NPay.Modules.Wallets.Application.Wallets.Commands.Handlers;
 
-internal sealed class TransferFundsHandler : ICommandHandler<TransferFunds>
+internal sealed class TransferFundsHandler : IRequestHandler<TransferFunds>
 {
     private readonly IWalletRepository _walletRepository;
     private readonly IClock _clock;
@@ -26,7 +27,7 @@ internal sealed class TransferFundsHandler : ICommandHandler<TransferFunds>
         _logger = logger;
     }
 
-    public async Task HandleAsync(TransferFunds command, CancellationToken cancellationToken = default)
+    public async Task Handle(TransferFunds command, CancellationToken cancellationToken)
     {
         var (fromWalletId, toWalletId, amount) = command;
         var fromWallet = await _walletRepository.GetAsync(fromWalletId);

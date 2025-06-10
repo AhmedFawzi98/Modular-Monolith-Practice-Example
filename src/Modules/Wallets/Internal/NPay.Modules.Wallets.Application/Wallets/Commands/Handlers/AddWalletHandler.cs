@@ -1,16 +1,17 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NPay.Modules.Wallets.Core.Wallets.Aggregates;
 using NPay.Modules.Wallets.Core.Wallets.Repositories;
 using NPay.Modules.Wallets.Shared.Events;
-using NPay.Shared.Commands;
 using NPay.Shared.Messaging;
 using NPay.Shared.Time;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NPay.Modules.Wallets.Application.Wallets.Commands.Handlers;
 
-internal sealed class AddWalletHandler : ICommandHandler<AddWallet>
+internal sealed class AddWalletHandler : IRequestHandler<AddWallet>
 {
     private readonly IWalletRepository _walletRepository;
     private readonly IClock _clock;
@@ -26,7 +27,7 @@ internal sealed class AddWalletHandler : ICommandHandler<AddWallet>
         _logger = logger;
     }
 
-    public async Task HandleAsync(AddWallet command, CancellationToken cancellationToken = default)
+    public async Task Handle(AddWallet command, CancellationToken cancellationToken)
     {
         var now = _clock.CurrentDate();
         var wallet = Wallet.Create(command.WalletId, command.OwnerId, command.Currency, now);

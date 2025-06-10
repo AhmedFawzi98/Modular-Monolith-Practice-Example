@@ -1,9 +1,9 @@
 using System;
-using NPay.Shared.Commands;
+using MediatR;
 
 namespace NPay.Modules.Wallets.Application.Wallets.Commands;
 
-public record AddWallet(Guid OwnerId, string Currency) : ICommand
+public record AddWallet(Guid OwnerId, string Currency) : IRequest
 {
     public Guid WalletId { get; init; } = Guid.NewGuid();
 }

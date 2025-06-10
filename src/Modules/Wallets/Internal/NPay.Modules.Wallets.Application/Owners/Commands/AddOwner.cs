@@ -1,5 +1,5 @@
-﻿using NPay.Shared.Commands;
+﻿using MediatR;
 
 namespace NPay.Modules.Wallets.Application.Owners.Commands;
 
-public record AddOwner(string Email) : ICommand;
+public record AddOwner(string Email) : IRequest;

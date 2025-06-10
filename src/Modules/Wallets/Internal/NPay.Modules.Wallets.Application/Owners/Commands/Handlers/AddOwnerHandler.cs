@@ -1,16 +1,16 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NPay.Modules.Users.Shared;
 using NPay.Modules.Wallets.Application.Owners.Exceptions;
 using NPay.Modules.Wallets.Core.Owners.Aggregates;
 using NPay.Modules.Wallets.Core.Owners.Repositories;
-using NPay.Shared.Commands;
 using NPay.Shared.Time;
 
 namespace NPay.Modules.Wallets.Application.Owners.Commands.Handlers;
 
-internal sealed class AddOwnerHandler : ICommandHandler<AddOwner>
+internal sealed class AddOwnerHandler : IRequestHandler<AddOwner>
 {
     private readonly IOwnerRepository _ownerRepository;
     private readonly IUsersModuleApi _usersModuleApi;
@@ -25,8 +25,8 @@ internal sealed class AddOwnerHandler : ICommandHandler<AddOwner>
         _clock = clock;
         _logger = logger;
     }
-        
-    public async Task HandleAsync(AddOwner command, CancellationToken cancellationToken = default)
+
+    public async Task Handle(AddOwner command, CancellationToken cancellationToken)
     {
         var user = await _usersModuleApi.GetUserAsync(command.Email);
         if (user is null)
