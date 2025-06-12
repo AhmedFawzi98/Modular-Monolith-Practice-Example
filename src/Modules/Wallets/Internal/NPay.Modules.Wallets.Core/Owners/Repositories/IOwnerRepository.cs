@@ -4,9 +4,9 @@ using NPay.Modules.Wallets.Core.SharedKernel;
 
 namespace NPay.Modules.Wallets.Core.Owners.Repositories;
 
-internal interface IOwnerRepository
+public interface IOwnerRepository
 {
     Task<Owner> GetAsync(OwnerId id);
-    Task AddAsync(Owner owner);
+    Task Add (Owner owner);
     Task UpdateAsync(Owner owner);
 }

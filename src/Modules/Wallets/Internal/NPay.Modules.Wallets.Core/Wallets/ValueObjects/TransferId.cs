@@ -2,7 +2,7 @@ using System;
 
 namespace NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
-internal sealed class TransferId : IEquatable<TransferId>
+public sealed class TransferId : IEquatable<TransferId>
 {
     public Guid Value { get; }
 

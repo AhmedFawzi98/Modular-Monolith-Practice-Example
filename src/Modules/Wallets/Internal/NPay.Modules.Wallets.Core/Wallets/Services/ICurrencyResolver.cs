@@ -3,7 +3,7 @@ using NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
 namespace NPay.Modules.Wallets.Core.Wallets.Services;
 
-internal interface ICurrencyResolver
+public interface ICurrencyResolver
 {
     Currency Resolve(Nationality nationality);
 }

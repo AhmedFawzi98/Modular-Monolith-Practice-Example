@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MassTransit;
+using MassTransit.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NPay.Modules.Wallets.Application.Wallets.Storage;
 using NPay.Modules.Wallets.Core.Owners.Repositories;
 using NPay.Modules.Wallets.Core.Wallets.Repositories;
@@ -8,12 +12,15 @@ using NPay.Modules.Wallets.Infrastructure.DAL.Repositories;
 using NPay.Modules.Wallets.Infrastructure.DAL.Seeder;
 using NPay.Modules.Wallets.Infrastructure.Storage;
 using NPay.Shared.Database;
+using NPay.Shared.Messaging;
+using System;
+using System.Reflection;
 
 namespace NPay.Modules.Wallets.Infrastructure;
 
 public static class Extensions
 {
-    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres<WalletsDbContext>(WalletDbConstants.SchemaName);
         services.AddScoped<IOwnerRepository, OwnerRepository>();
@@ -21,7 +28,15 @@ public static class Extensions
         services.AddScoped<IWalletStorage, WalletStorage>();
 
         services.AddScoped<IDbSeeder, WalletsSeeder>();
-            
+
         return services;
+    }
+
+    public static IBusRegistrationConfigurator ConfigureMasstrasnitForWalletModule(this IBusRegistrationConfigurator busconfig)
+    {
+        var infrastructreAssembly = Assembly.GetExecutingAssembly();
+        busconfig.AddConsumers(infrastructreAssembly);
+
+        return busconfig;
     }
 }

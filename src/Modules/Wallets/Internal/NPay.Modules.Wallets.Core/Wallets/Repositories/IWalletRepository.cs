@@ -5,10 +5,11 @@ using NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
 namespace NPay.Modules.Wallets.Core.Wallets.Repositories;
 
-internal interface IWalletRepository
+public interface IWalletRepository
 {
     Task<Wallet> GetAsync(WalletId id);
     Task<Wallet> GetAsync(OwnerId ownerId, Currency currency);
-    Task AddAsync(Wallet wallet);
+    void Add(Wallet wallet);
     Task UpdateAsync(Wallet wallet);
+    Task AddAsyncAndSave(Wallet wallet);
 }

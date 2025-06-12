@@ -2,7 +2,7 @@
 
 namespace NPay.Modules.Wallets.Core.SharedKernel;
 
-internal sealed class OwnerId : IEquatable<OwnerId>
+public sealed class OwnerId : IEquatable<OwnerId>
 {
     public Guid Value { get; }
         

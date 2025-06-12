@@ -4,7 +4,7 @@ using NPay.Modules.Wallets.Core.Owners.Exceptions;
 
 namespace NPay.Modules.Wallets.Core.Owners.ValueObjects;
 
-internal sealed class Nationality : IEquatable<Nationality>
+public sealed class Nationality : IEquatable<Nationality>
 {
     private static readonly HashSet<string> AllowedValues = new()
     {

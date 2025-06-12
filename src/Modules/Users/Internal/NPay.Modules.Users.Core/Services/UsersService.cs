@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NPay.Modules.Users.Core.DAL;
+using NPay.Modules.Users.Core.Domain;
 using NPay.Modules.Users.Core.Entities;
 using NPay.Modules.Users.Core.Exceptions;
 using NPay.Modules.Users.Shared.DTO;
 using NPay.Modules.Users.Shared.Events;
+using NPay.Shared.Events;
 using NPay.Shared.Messaging;
 using NPay.Shared.Time;
 
@@ -17,15 +19,15 @@ namespace NPay.Modules.Users.Core.Services;
 internal sealed class UsersService : IUsersService
 {
     private readonly UsersDbContext _dbContext;
-    private readonly IMessageBroker _messageBroker;
+    private readonly IEventPublisher _eventPublisher;
     private readonly IClock _clock;
     private readonly ILogger<UsersService> _logger;
 
-    public UsersService(UsersDbContext dbContext, IMessageBroker messageBroker, IClock clock,
+    public UsersService(UsersDbContext dbContext, IEventPublisher eventPublisher, IClock clock,
         ILogger<UsersService> logger)
     {
         _dbContext = dbContext;
-        _messageBroker = messageBroker;
+        _eventPublisher = eventPublisher;
         _clock = clock;
         _logger = logger;
     }
@@ -83,9 +85,15 @@ internal sealed class UsersService : IUsersService
             
         var user = new User(dto.UserId, email, dto.FullName, dto.Address,
             dto.Nationality, dto.Identity, _clock.CurrentDate());
-        await _dbContext.Users.AddAsync(user);
+
+         _dbContext.Users.Add(user);
+        
         await _dbContext.SaveChangesAsync();
-        await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email, user.FullName, user.Nationality));
+
+        await _eventPublisher.PublishIntegerationEventAsync(new UserCreated(user.Id, user.Email, user.FullName, user.Nationality));
+
+        await _eventPublisher.PublishDomainEventAsync(new TrialDomainEventUserCreated(user.Id));
+
         _logger.LogInformation($"Created the user with ID: '{dto.UserId}'.");
     }
 
@@ -99,8 +107,10 @@ internal sealed class UsersService : IUsersService
 
         user.Verify(_clock.CurrentDate());
         _dbContext.Users.Update(user);
+
+        await _eventPublisher.PublishIntegerationEventAsync(new UserVerified(user.Id, user.Email, user.Nationality));
         await _dbContext.SaveChangesAsync();
-        await _messageBroker.PublishAsync(new UserVerified(user.Id, user.Email, user.Nationality));
+        
         _logger.LogInformation($"Verified the user with ID: '{user.Id}'.");
     }
 

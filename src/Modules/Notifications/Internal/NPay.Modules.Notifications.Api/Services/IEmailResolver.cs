@@ -2,7 +2,7 @@
 
 namespace NPay.Modules.Notifications.Api.Services;
 
-internal interface IEmailResolver
+public interface IEmailResolver
 {
     string GetForOwner(Guid ownerId);
 }

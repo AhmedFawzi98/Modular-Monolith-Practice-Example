@@ -2,7 +2,7 @@
 
 namespace NPay.Modules.Notifications.Api.Services;
 
-internal interface IEmailSender
+public interface IEmailSender
 {
     Task SendAsync(string receiver, string template);
 }

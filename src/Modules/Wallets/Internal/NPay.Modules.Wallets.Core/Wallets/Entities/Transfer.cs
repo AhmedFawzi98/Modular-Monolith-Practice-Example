@@ -3,7 +3,7 @@ using NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
 namespace NPay.Modules.Wallets.Core.Wallets.Entities;
 
-internal class Transfer
+public class Transfer
 {
     public TransferId Id { get; private set; }
     public TransferId ReferenceId { get; private set; }
@@ -37,7 +37,7 @@ internal class Transfer
         DateTime createdAt, TransferId referenceId = null)
         => new(id, walletId, currency, amount, TransferDirection.Out, createdAt, referenceId);
 
-    internal enum TransferDirection
+    public enum TransferDirection
     {
         In,
         Out

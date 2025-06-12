@@ -4,7 +4,7 @@ using NPay.Modules.Wallets.Core.SharedKernel;
 
 namespace NPay.Modules.Wallets.Core.Owners.Aggregates;
 
-internal class Owner : AggregateRoot<OwnerId>
+public class Owner : AggregateRoot<OwnerId>
 {
     public FullName FullName { get; private set; }
     public Nationality Nationality { get; private set; }

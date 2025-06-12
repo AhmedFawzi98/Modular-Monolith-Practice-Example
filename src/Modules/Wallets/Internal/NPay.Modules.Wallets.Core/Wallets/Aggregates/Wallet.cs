@@ -8,7 +8,7 @@ using NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
 namespace NPay.Modules.Wallets.Core.Wallets.Aggregates;
 
-internal class Wallet : AggregateRoot<WalletId>
+public class Wallet : AggregateRoot<WalletId>
 {
     private HashSet<Transfer> _transfers = new();
 

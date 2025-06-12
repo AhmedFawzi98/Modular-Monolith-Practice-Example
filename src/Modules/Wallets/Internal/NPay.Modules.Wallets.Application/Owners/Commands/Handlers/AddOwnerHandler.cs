@@ -28,20 +28,20 @@ internal sealed class AddOwnerHandler : IRequestHandler<AddOwner>
 
     public async Task Handle(AddOwner command, CancellationToken cancellationToken)
     {
-        var user = await _usersModuleApi.GetUserAsync(command.Email);
-        if (user is null)
-        {
-            throw new UserNotFoundException(command.Email);
-        }
+        //var user = await _usersModuleApi.GetUserAsync(command.Email);
+        //if (user is null)
+        //{
+        //    throw new UserNotFoundException(command.Email);
+        //}
 
-        if (await _ownerRepository.GetAsync(user.UserId) is not null)
-        {
-            throw new OwnerAlreadyExistsException(command.Email);
-        }
+        //if (await _ownerRepository.GetAsync(user.UserId) is not null)
+        //{
+        //    throw new OwnerAlreadyExistsException(command.Email);
+        //}
 
-        var now = _clock.CurrentDate();
-        var owner = new Owner(user.UserId, user.FullName, user.Nationality, now);
-        await _ownerRepository.AddAsync(owner);
-        _logger.LogInformation($"Created an owner for the user with ID: '{user.UserId}'.");
+        //var now = _clock.CurrentDate();
+        //var owner = new Owner(user.UserId, user.FullName, user.Nationality, now);
+        //await _ownerRepository.AddAsync(owner);
+        //_logger.LogInformation($"Created an owner for the user with ID: '{user.UserId}'.");
     }
 }

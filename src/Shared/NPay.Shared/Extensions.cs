@@ -17,11 +17,8 @@ public static class Extensions
     public static IServiceCollection AddSharedFramework(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddErrorHandling();
-        services.AddEvents();
-        services.AddMessaging();
-        services.AddPostgres(configuration);
+        services.AddPostgresOptionsAndDBInitalizer(configuration);
         services.AddSingleton<IClock, UtcClock>();
-        services.AddSingleton<IEventDispatcher, InMemoryEventDispatcher>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
         return services;

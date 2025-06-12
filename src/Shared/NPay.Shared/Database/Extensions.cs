@@ -9,7 +9,7 @@ public static class Extensions
 {
     private const string SectionName = "postgres";
         
-    internal static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
+    internal static IServiceCollection AddPostgresOptionsAndDBInitalizer(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<PostgresOptions>(configuration.GetSection(SectionName));
         services.AddHostedService<DbContextAppInitializer>();

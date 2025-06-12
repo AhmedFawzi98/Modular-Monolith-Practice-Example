@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NPay.Modules.Users.Core.DAL;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace NPay.Modules.Users.Core.DAL.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
@@ -16,9 +18,10 @@ namespace NPay.Modules.Users.Core.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("users")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("NPay.Modules.Users.Core.Entities.User", b =>
                 {
@@ -61,7 +64,7 @@ namespace NPay.Modules.Users.Core.DAL.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "users");
                 });
 #pragma warning restore 612, 618
         }

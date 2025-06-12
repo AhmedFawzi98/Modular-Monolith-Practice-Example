@@ -3,7 +3,7 @@ using NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
 namespace NPay.Modules.Wallets.Core.Wallets.Services;
 
-internal sealed class CurrencyResolver : ICurrencyResolver
+public sealed class CurrencyResolver : ICurrencyResolver
 {
     public Currency Resolve(Nationality nationality)
         => nationality.Value switch

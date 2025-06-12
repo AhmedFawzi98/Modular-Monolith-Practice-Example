@@ -4,7 +4,7 @@ using NPay.Modules.Wallets.Core.Wallets.Exceptions;
 
 namespace NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
-internal sealed class Amount : IEquatable<Amount>
+public sealed class Amount : IEquatable<Amount>
 {
     public decimal Value { get; }
 

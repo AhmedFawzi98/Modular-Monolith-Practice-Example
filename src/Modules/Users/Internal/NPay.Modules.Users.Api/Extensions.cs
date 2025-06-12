@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NPay.Modules.Users.Core;
 
@@ -6,9 +7,9 @@ namespace NPay.Modules.Users.Api;
 
 public static class Extensions
 {
-    public static IServiceCollection AddUsersModule(this IServiceCollection services)
+    public static IServiceCollection AddUsersModule(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddCoreLayer();
+        services.AddCoreLayer(configuration);
             
         return services;
     }

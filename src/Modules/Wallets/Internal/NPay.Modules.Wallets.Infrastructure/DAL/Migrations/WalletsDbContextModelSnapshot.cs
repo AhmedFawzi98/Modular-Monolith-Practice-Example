@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NPay.Modules.Wallets.Infrastructure.DAL;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace NPay.Modules.Wallets.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(WalletsDbContext))]
@@ -16,9 +18,10 @@ namespace NPay.Modules.Wallets.Infrastructure.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("wallets")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("NPay.Modules.Wallets.Core.Owners.Aggregates.Owner", b =>
                 {
@@ -44,7 +47,7 @@ namespace NPay.Modules.Wallets.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners");
+                    b.ToTable("Owners", "wallets");
                 });
 
             modelBuilder.Entity("NPay.Modules.Wallets.Core.Wallets.Aggregates.Wallet", b =>
@@ -70,7 +73,7 @@ namespace NPay.Modules.Wallets.Infrastructure.DAL.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Wallets");
+                    b.ToTable("Wallets", "wallets");
                 });
 
             modelBuilder.Entity("NPay.Modules.Wallets.Core.Wallets.Entities.Transfer", b =>
@@ -101,7 +104,7 @@ namespace NPay.Modules.Wallets.Infrastructure.DAL.Migrations
 
                     b.HasIndex("WalletId");
 
-                    b.ToTable("Transfers");
+                    b.ToTable("Transfers", "wallets");
                 });
 
             modelBuilder.Entity("NPay.Modules.Wallets.Core.Wallets.Aggregates.Wallet", b =>

@@ -4,7 +4,7 @@ using NPay.Modules.Wallets.Core.Wallets.Exceptions;
 
 namespace NPay.Modules.Wallets.Core.Wallets.ValueObjects;
 
-internal sealed class Currency : IEquatable<Currency>
+public sealed class Currency : IEquatable<Currency>
 {
     private static readonly HashSet<string> AllowedValues = new()
     {

@@ -11,6 +11,8 @@ public static class Extensions
     {
         services.AddTransient<IWalletsModuleApi, WalletsModuleApi>();
         services.AddMediator(Assembly.GetExecutingAssembly());
+
+
         return services;
     }
 }

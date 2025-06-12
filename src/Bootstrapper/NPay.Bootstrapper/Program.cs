@@ -6,8 +6,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NPay.Modules.Notifications.Api;
 using NPay.Modules.Users.Api;
+using NPay.Modules.Users.Core;
 using NPay.Modules.Wallets.CompositionRoot;
+using NPay.Modules.Wallets.Infrastructure;
 using NPay.Shared;
+using NPay.Shared.Messaging;
 
 var builder = WebApplication
     .CreateBuilder(args);
@@ -15,10 +18,17 @@ var builder = WebApplication
 builder.Services.AddControllers();
 
 builder.Services
-    .AddNotificationsModule()
-    .AddUsersModule()
-    .AddWalletsModule()
-    .AddSharedFramework(builder.Configuration);
+    .AddNotificationsModule(builder.Configuration)
+    .AddUsersModule(builder.Configuration)
+    .AddWalletsModule(builder.Configuration)
+    .AddSharedFramework(builder.Configuration)
+    .AddMessaging(builder.Configuration, busconfig =>
+    {
+        busconfig
+            .ConfigureMasstrasnitForWalletModule()
+            .ConfigureMasstrasnitForNotificationsModule()
+            .ConfigureMasstrasnitForUsersModule();
+    });
 
 builder.Services.AddSwaggerGen(swagger =>
 {

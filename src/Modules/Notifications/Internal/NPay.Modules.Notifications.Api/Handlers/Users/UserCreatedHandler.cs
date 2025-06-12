@@ -1,20 +1,23 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using MassTransit;
 using NPay.Modules.Notifications.Api.Services;
 using NPay.Modules.Users.Shared.Events;
-using NPay.Shared.Events;
+using System.Threading.Tasks;
 
 namespace NPay.Modules.Notifications.Api.Handlers.Users;
 
-internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
+public sealed class UserCreatedNotificaionHandler : IConsumer<UserCreated>
 {
     private readonly IEmailSender _emailSender;
 
-    public UserCreatedHandler(IEmailSender emailSender)
+    public UserCreatedNotificaionHandler(IEmailSender emailSender)
     {
         _emailSender = emailSender;
     }
 
-    public Task HandleAsync(UserCreated @event, CancellationToken cancellationToken = default)
-        => _emailSender.SendAsync(@event.Email, "account_created");
+    public async Task Consume(ConsumeContext<UserCreated> context)
+    {
+        var userCreatedEvent = context.Message;
+        await _emailSender.SendAsync(userCreatedEvent.Email, "account_created");
+    }
+        
 }

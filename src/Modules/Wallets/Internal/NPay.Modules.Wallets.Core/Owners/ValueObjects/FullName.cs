@@ -3,7 +3,7 @@ using NPay.Modules.Wallets.Core.Owners.Exceptions;
 
 namespace NPay.Modules.Wallets.Core.Owners.ValueObjects;
 
-internal sealed class FullName : IEquatable<FullName>
+public sealed class FullName : IEquatable<FullName>
 {
     public string Value { get; }
         

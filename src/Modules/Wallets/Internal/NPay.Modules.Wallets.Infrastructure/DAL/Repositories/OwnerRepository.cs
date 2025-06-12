@@ -6,7 +6,7 @@ using NPay.Modules.Wallets.Core.SharedKernel;
 
 namespace NPay.Modules.Wallets.Infrastructure.DAL.Repositories;
 
-internal class OwnerRepository : IOwnerRepository
+public class OwnerRepository : IOwnerRepository
 {
     private readonly WalletsDbContext _context;
     private readonly DbSet<Owner> _owners;
@@ -20,9 +20,9 @@ internal class OwnerRepository : IOwnerRepository
     public Task<Owner> GetAsync(OwnerId id)
         => _owners.SingleOrDefaultAsync(x => x.Id.Equals(id));
 
-    public async Task AddAsync(Owner owner)
+    public async Task Add (Owner owner)
     {
-        await _owners.AddAsync(owner);
+        _owners.Add(owner);
         await _context.SaveChangesAsync();
     }
 

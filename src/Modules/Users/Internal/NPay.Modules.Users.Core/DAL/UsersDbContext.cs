@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using NPay.Modules.Users.Core.DAL.Constants;
 using NPay.Modules.Users.Core.Entities;
@@ -16,5 +17,6 @@ internal sealed class UsersDbContext : DbContext
     {
         modelBuilder.HasDefaultSchema(UsersDbConstants.SchemaName);
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
     }
 }
